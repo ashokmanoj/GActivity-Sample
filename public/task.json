@@ -1,0 +1,28 @@
+{
+  "id": 725,
+  "name": "Maintenance",
+  "institution": "GANDHI MES : 18220501002 | KARIMGANJ",
+  "status": "In Progress",
+  "submittedAt": "29 Nov 2025 11:00 AM",
+  "details": {
+    "Activity ID": "1097962",
+    "Program Name": "APECR",
+    "Category": "Maintenance",
+    "Sub Category": "Other",
+    "Assign Start Date": "25 Oct 2025",
+    "Start Time": "29 Nov 2025 08:59 AM",
+    "End Time": "29 Nov 2025 11:00 AM",
+    "Last Visited": "29 Nov 2025 11:00 AM",
+    "Comment": "Now class running",
+    "Technical Executive": "Kaliprasanna Das : 6901093195"
+  },
+  "audio": "",
+  "images": [
+    "https://picsum.photos/200/200?1",
+    "https://picsum.photos/200/200?2",
+    "https://picsum.photos/200/200?3",
+    "https://picsum.photos/200/200?4"
+  ],
+  "map": "https://maps.google.com",
+  "distance": 0
+}
