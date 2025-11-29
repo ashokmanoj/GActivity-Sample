@@ -5,8 +5,9 @@ export default function Expenses() {
     <div>
       <ExpensesFilter />
 
-      <div className="mt-8">
+      <div className="mt-8 text-center">
         <h2 className="text-xl font-semibold">Expenses Summary</h2>
+        <span>Expenses Summary data show here..........</span>
       </div>
     </div>
   );
