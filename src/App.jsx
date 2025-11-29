@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Distance from "./pages/Distance";
 import Expenses from "./pages/Expenses";
-import TaskList from "./components/tasks/TaskList";
+import TaskList from "./pages/TaskList";
 import Activity from "./pages/Activity";
 import TechSummary from "./pages/TechSummary";
 import AssetTransactions from "./pages/AssetTransactions";
