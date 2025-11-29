@@ -16,14 +16,14 @@ export default function ActivityPage() {
   }, []);
 
   if (!task)
-    return <p className="text-center mt-10 text-gray-500">Loading activity...</p>;
+    return (
+      <p className="text-center mt-10 text-gray-500">Loading activity...</p>
+    );
 
   return (
     <div className="p-4 space-y-6">
-
       {/* ---------------- FILTER SECTION (always visible) ---------------- */}
       <div className="bg-white rounded-xl shadow border p-4 grid grid-cols-2 md:grid-cols-6 gap-3">
-
         <select className="border rounded-lg px-3 py-2 w-full">
           <option>All Project</option>
         </select>
@@ -53,7 +53,6 @@ export default function ActivityPage() {
 
       {/* ---------------- ACTIVITY CARD UI ---------------- */}
       <ActivityCard task={task} />
-
     </div>
   );
 }

@@ -40,7 +40,6 @@ export default function ActivityCard({ task }) {
     <>
       {/* ---------------- CARD UI ---------------- */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-white rounded-xl shadow border p-6">
-
         {/* LEFT SIDE */}
         <div className="lg:col-span-2">
           <div className="flex items-start justify-between">
@@ -86,7 +85,9 @@ export default function ActivityCard({ task }) {
         <div>
           <div className="flex justify-between mb-2">
             <h2 className="font-semibold">Audio</h2>
-            <a href={task.map} className="text-blue-600 text-sm">Map</a>
+            <a href={task.map} className="text-blue-600 text-sm">
+              Map
+            </a>
           </div>
 
           {task.audio ? (
@@ -113,7 +114,6 @@ export default function ActivityCard({ task }) {
       {/* ---------------- POPUP VIEWER ---------------- */}
       {showPopup && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-
           {/* CLOSE BUTTON FIXED */}
           <button
             onClick={closePopup}
@@ -140,7 +140,6 @@ export default function ActivityCard({ task }) {
 
           {/* IMAGE AREA */}
           <div className="max-w-[95%] max-h-[90%] flex flex-col items-center">
-
             <img
               src={task.images[popupIndex]}
               style={{ transform: `scale(${zoom}) rotate(${rotate}deg)` }}
@@ -161,11 +160,15 @@ export default function ActivityCard({ task }) {
                 <FiRotateCw size={22} />
               </button>
 
-              <button onClick={() => { setZoom(1); setRotate(0); }}>
+              <button
+                onClick={() => {
+                  setZoom(1);
+                  setRotate(0);
+                }}
+              >
                 <FiX size={18} />
               </button>
             </div>
-
           </div>
         </div>
       )}
