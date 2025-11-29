@@ -1,0 +1,48 @@
+{
+  "task": {
+    "id": 1216,
+    "name": "MM",
+    "institution": "PRAGATI MES : 18160307404 | SIBSAGAR",
+    "status": "Completed",
+    "submittedAt": "29 Nov 2025 04:42:25 PM",
+    "details": {
+      "Activity ID": "1098456",
+      "Program Name": "APECR 645",
+      "Category": "Maintenance",
+      "Sub-Category": "Hardware issue",
+      "Assign Start Date": "30 Oct 2025",
+      "Start Time": "29 Nov 2025 10:19 AM",
+      "End Time": "29 Nov 2025 04:42 PM",
+      "Last Visited": "29 Nov 2025 04:42:31 PM",
+      "Technical Executive": "Hemenga Boruah : 8876871012"
+    },
+    "comment": "completed",
+    "map": "https://maps.google.com",
+    "distance": "3.1",
+    "audio": "",
+    "images": [
+      "https://picsum.photos/350/200?1",
+      "https://picsum.photos/350/200?2"
+    ]
+  },
+  "logs": [
+    {
+      "date": "29 Nov 2025",
+      "activity": "Site Visit",
+      "inTime": "10:19 AM",
+      "outTime": "04:42 PM",
+      "distance": 3.1,
+      "rm": "RM 01",
+      "status": "Completed"
+    },
+    {
+      "date": "28 Nov 2025",
+      "activity": "Inspection",
+      "inTime": "09:00 AM",
+      "outTime": "03:00 PM",
+      "distance": 2.4,
+      "rm": "RM 01",
+      "status": "Pending"
+    }
+  ]
+}
