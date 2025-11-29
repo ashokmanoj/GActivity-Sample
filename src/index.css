@@ -1,3 +1,8 @@
+/* Import Calendar Styles FIRST */
+@import "react-date-range/dist/styles.css";
+@import "react-date-range/dist/theme/default.css";
+
+/* Then Tailwind directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
