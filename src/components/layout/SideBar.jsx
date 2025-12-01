@@ -25,7 +25,7 @@ const modules = [
   },
   {
     name: "GActivity : New Asset Transaction List",
-    path: "/newasset",
+    path: "/asset-transactions",
     icon: <FiUsers size={20} />,
   },
   {
