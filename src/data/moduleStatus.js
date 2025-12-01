@@ -6,5 +6,5 @@ export const moduleStatus = [
   { title: "Technical Executive Summary Status", path: "/tech-summary" },
   { title: "Asset Transaction Status", path: "/asset-transactions" },
   { title: "User Active / De-Active Status", path: "/user-status" },
-  { title: "Class Run Status", path: "/class-status" }
+  { title: "Class Run Status", path: "/class-status" },
 ];
