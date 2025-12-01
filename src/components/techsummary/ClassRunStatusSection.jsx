@@ -2,17 +2,13 @@ import React from "react";
 import usePagination from "../../utils/usePagination";
 
 export default function ClassRunStatusSection({ summary }) {
-  const {
-    page,
-    totalPages,
-    currentData,
-    goNext,
-    goPrev,
-  } = usePagination(summary.classRunStatus, 10);
+  const { page, totalPages, currentData, goNext, goPrev } = usePagination(
+    summary.classRunStatus,
+    10
+  );
 
   return (
     <div className="bg-white shadow rounded-xl border mt-4">
-
       <div className="bg-red-50 border-b p-3 font-semibold">
         Class Run Status
       </div>
@@ -47,7 +43,9 @@ export default function ClassRunStatusSection({ summary }) {
                     <td className="border p-2">{row.sessionRun}</td>
                     <td className="border p-2">{row.volunteerPresence}</td>
                     <td className="border p-2">{row.tickets}</td>
-                    <td className="border p-2">{row.slcStatusDays.join(" ")}</td>
+                    <td className="border p-2">
+                      {row.slcStatusDays.join(" ")}
+                    </td>
                     <td className="border p-2">{row.lastRACRun}</td>
                   </tr>
                 ))}

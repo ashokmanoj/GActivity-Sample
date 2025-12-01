@@ -2,18 +2,14 @@ import React from "react";
 import usePagination from "../../utils/usePagination";
 
 export default function AttendanceDetail({ summary, exec, onClose }) {
-  const {
-    page,
-    totalPages,
-    currentData,
-    goNext,
-    goPrev,
-  } = usePagination(summary.attendanceRows, 10);
+  const { page, totalPages, currentData, goNext, goPrev } = usePagination(
+    summary.attendanceRows,
+    10
+  );
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
       <div className="bg-white w-[95%] max-w-6xl p-6 rounded-xl shadow-xl relative">
-
         {/* CLOSE BUTTON */}
         <button
           className="absolute top-4 right-4 text-xl font-bold"
@@ -76,7 +72,6 @@ export default function AttendanceDetail({ summary, exec, onClose }) {
 
             {/* PAGINATION */}
             <div className="flex justify-between items-center mt-4">
-
               <button
                 className={`px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 ${
                   page === 1 && "opacity-50 cursor-not-allowed"
@@ -100,7 +95,6 @@ export default function AttendanceDetail({ summary, exec, onClose }) {
               >
                 Next
               </button>
-
             </div>
           </>
         )}

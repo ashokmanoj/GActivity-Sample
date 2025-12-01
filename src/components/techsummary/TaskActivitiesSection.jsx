@@ -3,29 +3,25 @@ import usePagination from "../../utils/usePagination";
 import TaskActivitiesPhoto from "./TaskActivitiesPhoto";
 
 export default function TaskActivitiesSection({ summary }) {
-  const {
-    page,
-    totalPages,
-    currentData,
-    goNext,
-    goPrev,
-  } = usePagination(summary.taskActivities, 10);
+  const { page, totalPages, currentData, goNext, goPrev } = usePagination(
+    summary.taskActivities,
+    10
+  );
 
   return (
     <div className="w-full bg-white rounded-xl shadow border p-0">
-
       {/* HEADER */}
       <div className="p-3 bg-red-50 border-b font-semibold">
         Task Activities ({summary.taskActivities.length})
       </div>
 
       <div className="flex">
-
         {/* 65% TABLE SECTION */}
         <div className="w-[65%] border-r">
-          
           {summary.taskActivities.length === 0 ? (
-            <p className="p-4 text-gray-500 text-center">No activities found.</p>
+            <p className="p-4 text-gray-500 text-center">
+              No activities found.
+            </p>
           ) : (
             <>
               <div className="overflow-auto max-h-[55vh]">
@@ -67,7 +63,9 @@ export default function TaskActivitiesSection({ summary }) {
                   Previous
                 </button>
 
-                <span>Page {page} of {totalPages}</span>
+                <span>
+                  Page {page} of {totalPages}
+                </span>
 
                 <button
                   className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
@@ -77,7 +75,6 @@ export default function TaskActivitiesSection({ summary }) {
                   Next
                 </button>
               </div>
-
             </>
           )}
         </div>
@@ -86,7 +83,6 @@ export default function TaskActivitiesSection({ summary }) {
         <div className="w-[35%]">
           <TaskActivitiesPhoto activities={summary.taskActivities} />
         </div>
-
       </div>
     </div>
   );

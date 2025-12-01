@@ -28,8 +28,16 @@ const modules = [
     path: "/newasset",
     icon: <FiUsers size={20} />,
   },
-  { name: "User Active & De-Active", path: "/useractive", icon: <FiSettings size={20} /> },
-  { name: "Class Run Status", path: "/class-status", icon: <FiHelpCircle size={20} /> },
+  {
+    name: "User Active & De-Active",
+    path: "/useractive",
+    icon: <FiSettings size={20} />,
+  },
+  {
+    name: "Class Run Status",
+    path: "/class-status",
+    icon: <FiHelpCircle size={20} />,
+  },
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
@@ -67,7 +75,11 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                 className={`
                   w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm
                   transition-all
-                  ${isActive ? "bg-blue-100 text-blue-700 font-semibold" : "hover:bg-gray-100"}
+                  ${
+                    isActive
+                      ? "bg-blue-100 text-blue-700 font-semibold"
+                      : "hover:bg-gray-100"
+                  }
                 `}
               >
                 {item.icon}
@@ -97,7 +109,11 @@ export default function Sidebar({ collapsed, setCollapsed }) {
           onClick={() => setCollapsed(!collapsed)}
           className="p-2 rounded hover:bg-gray-100 transition"
         >
-          {collapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
+          {collapsed ? (
+            <FiChevronRight size={20} />
+          ) : (
+            <FiChevronLeft size={20} />
+          )}
         </button>
       </div>
     </aside>

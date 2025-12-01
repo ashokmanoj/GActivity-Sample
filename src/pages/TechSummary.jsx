@@ -15,7 +15,9 @@ import AttendanceDetail from "../components/techsummary/AttendanceDetail";
 
 export default function TechSummary() {
   const [selectedRm, setSelectedRm] = useState(rms[0]);
-  const [selectedDesignation, setSelectedDesignation] = useState(designations[0]);
+  const [selectedDesignation, setSelectedDesignation] = useState(
+    designations[0]
+  );
   const [selectedExecId, setSelectedExecId] = useState(executives[0].id);
   const [selectedDate, setSelectedDate] = useState("2025-11-27");
   const [mode, setMode] = useState("day");
@@ -68,7 +70,6 @@ export default function TechSummary() {
 
   return (
     <div className="p-4 space-y-6">
-
       {/* FILTER BAR */}
       <FilterBar
         selectedRm={selectedRm}

@@ -28,7 +28,6 @@ export default function TaskActivitiesPhoto({ activities }) {
 
   return (
     <div className="h-full flex flex-col p-3 bg-white rounded-xl shadow border">
-
       {/* HEADER */}
       <div className="text-sm font-semibold mb-2 border-b pb-2 text-gray-700 flex justify-between">
         <span>Task Activities Photo</span>
@@ -39,7 +38,6 @@ export default function TaskActivitiesPhoto({ activities }) {
 
       {/* IMAGE VIEWER */}
       <div className="relative flex-1 flex items-center justify-center overflow-hidden">
-
         {/* LEFT ARROW */}
         <button
           onClick={goPrev}
@@ -70,11 +68,21 @@ export default function TaskActivitiesPhoto({ activities }) {
 
       {/* DETAILS */}
       <div className="mt-4 text-xs space-y-1">
-        <p><strong>Activity Date:</strong> {activity.date}</p>
-        <p><strong>Executive:</strong> {activity.executive}</p>
-        <p><strong>Outcome:</strong> {activity.outcome}</p>
-        <p><strong>Status:</strong> {activity.status}</p>
-        <p><strong>Achievement:</strong> {activity.achievement}</p>
+        <p>
+          <strong>Activity Date:</strong> {activity.date}
+        </p>
+        <p>
+          <strong>Executive:</strong> {activity.executive}
+        </p>
+        <p>
+          <strong>Outcome:</strong> {activity.outcome}
+        </p>
+        <p>
+          <strong>Status:</strong> {activity.status}
+        </p>
+        <p>
+          <strong>Achievement:</strong> {activity.achievement}
+        </p>
       </div>
 
       {/* DOT INDICATORS */}
