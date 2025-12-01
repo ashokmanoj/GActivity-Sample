@@ -1,29 +1,23 @@
 import React, { useState } from "react";
-import {
-  FiChevronDown,
-  FiMapPin,
-  FiUser,
-  FiFileText,
-  FiRefreshCcw,
-  FiLayers,
-  FiFlag,
-} from "react-icons/fi";
+import { FiChevronDown, FiFileText, FiUser } from "react-icons/fi";
+import { usePageTitle } from "../../context/PageTitleContext";
 
 export default function Header() {
+  const { pageTitle } = usePageTitle();
   const [openReports, setOpenReports] = useState(false);
 
   return (
-    <header className="w-full h-16 bg-white border-b shadow-sm flex items-center justify-between px-6">
+    <header className="w-full h-16 bg-white border-b shadow-sm flex items-center justify-between px-6 relative">
 
-      {/* LEFT — PAGE TITLE / MODULE NAME */}
-      <div className="text-lg font-semibold text-gray-700">
-        GActivity
-      </div>
+      {/* PAGE TITLE */}
+      <h1 className="text-lg font-semibold text-gray-800">
+        {pageTitle}
+      </h1>
 
-      {/* RIGHT AREA */}
+      {/* RIGHT SIDE */}
       <div className="flex items-center gap-6">
 
-        {/* REPORT DROPDOWN */}
+        {/* REPORTS DROPDOWN */}
         <div className="relative">
           <button
             onClick={() => setOpenReports(!openReports)}
@@ -37,21 +31,20 @@ export default function Header() {
           {openReports && (
             <div className="absolute right-0 mt-2 w-64 bg-white shadow-xl border rounded-xl py-2 z-50">
 
-              {/* --- Report Items --- */}
-              <ReportItem icon={<FiFlag />} text="Institution Location" />
-              <ReportItem icon={<FiRefreshCcw />} text="Visit Reports" />
-              <ReportItem icon={<FiLayers />} text="Sub-Meter Reports" />
-              <ReportItem icon={<FiFileText />} text="Documentation Reports" />
-              <ReportItem icon={<FiMapPin />} text="GeoData Received" />
-              <ReportItem icon={<FiUser />} text="All Users" />
+              <ReportItem text="Institution Location" />
+              <ReportItem text="Visit Reports" />
+              <ReportItem text="Sub-Meter Reports" />
+              <ReportItem text="Documentation Reports" />
+              <ReportItem text="GeoData Received" />
+              <ReportItem text="All Users" />
 
               <hr className="my-2" />
 
-              <ReportItem icon={<FiFileText />} text="Log Report" />
-              <ReportItem icon={<FiFileText />} text="Monthly Log Report" />
-              <ReportItem icon={<FiMapPin />} text="Task GPS Log Reports" />
-              <ReportItem icon={<FiRefreshCcw />} text="Recent Visit Reports" />
-              <ReportItem icon={<FiLayers />} text="Task Status Reports" />
+              <ReportItem text="Log Report" />
+              <ReportItem text="Monthly Log Report" />
+              <ReportItem text="Task GPS Log Reports" />
+              <ReportItem text="Recent Visit Reports" />
+              <ReportItem text="Task Status Reports" />
             </div>
           )}
         </div>
@@ -65,13 +58,10 @@ export default function Header() {
   );
 }
 
-/* ------------------- REUSABLE ITEM COMPONENT ------------------- */
-function ReportItem({ icon, text }) {
+/* REPORT ITEM COMPONENT */
+function ReportItem({ text }) {
   return (
-    <button
-      className="w-full flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
-    >
-      <span className="text-gray-600">{icon}</span>
+    <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">
       {text}
     </button>
   );
