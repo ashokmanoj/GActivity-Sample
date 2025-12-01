@@ -126,7 +126,6 @@ export const assetTransactions = [
   // add more dummy rows:
 ];
 
-
 // Helper to get unique filter options from data
 export const getAssetFilterOptions = () => {
   const projects = new Set();

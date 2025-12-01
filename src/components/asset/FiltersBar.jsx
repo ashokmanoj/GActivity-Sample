@@ -2,19 +2,13 @@
 
 import React from "react";
 
-export default function FiltersBar({
-  options,
-  filters,
-  setFilters,
-  onSearch,
-}) {
+export default function FiltersBar({ options, filters, setFilters, onSearch }) {
   const handleChange = (field) => (e) => {
     setFilters((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   return (
     <div className="bg-white rounded-xl shadow border p-4 flex flex-wrap gap-3 items-center">
-
       {/* Project */}
       <select
         className="border rounded-lg px-3 py-2 min-w-[180px]"
@@ -23,7 +17,9 @@ export default function FiltersBar({
       >
         <option value="">All Project</option>
         {options.projects.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 
@@ -35,7 +31,9 @@ export default function FiltersBar({
       >
         <option value="">All RM</option>
         {options.rms.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 
@@ -47,7 +45,9 @@ export default function FiltersBar({
       >
         <option value="">Bee friend</option>
         {options.beeFriends.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 
@@ -59,7 +59,9 @@ export default function FiltersBar({
       >
         <option value="">All Executive</option>
         {options.executives.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 
@@ -71,7 +73,9 @@ export default function FiltersBar({
       >
         <option value="">All Material</option>
         {options.materials.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 
@@ -83,7 +87,9 @@ export default function FiltersBar({
       >
         <option value="">All Location</option>
         {options.locations.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 
@@ -95,7 +101,9 @@ export default function FiltersBar({
       >
         <option value="">All Status</option>
         {options.statuses.map((p) => (
-          <option key={p} value={p}>{p}</option>
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
 

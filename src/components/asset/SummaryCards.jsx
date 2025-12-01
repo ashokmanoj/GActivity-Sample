@@ -11,13 +11,7 @@ const CARD_COLORS = {
 };
 
 export default function SummaryCards({ counts }) {
-  const cards = [
-    "To Store",
-    "From Store",
-    "In Hand",
-    "Institution",
-    "Vendor",
-  ];
+  const cards = ["To Store", "From Store", "In Hand", "Institution", "Vendor"];
 
   return (
     <div className="mt-4 grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
@@ -27,9 +21,7 @@ export default function SummaryCards({ counts }) {
           className={`${CARD_COLORS[key]} text-white rounded-xl shadow p-4 h-28 flex flex-col justify-between`}
         >
           <div className="text-sm font-semibold">{key}</div>
-          <div className="text-2xl font-bold">
-            {counts[key] ?? "--"}
-          </div>
+          <div className="text-2xl font-bold">{counts[key] ?? "--"}</div>
         </div>
       ))}
     </div>
