@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiChevronDown, FiFileText, FiUser } from "react-icons/fi";
-import { usePageTitle } from "../../context/PageTitleContext";
+import { usePageTitle } from "../context/PageTitleContext";  
 
 export default function Header() {
   const { pageTitle } = usePageTitle();
@@ -8,11 +8,15 @@ export default function Header() {
 
   return (
     <header className="w-full h-16 bg-white border-b shadow-sm flex items-center justify-between px-6 relative">
+
       {/* PAGE TITLE */}
-      <h1 className="text-lg font-semibold text-gray-800">{pageTitle}</h1>
+      <h1 className="text-lg font-semibold text-gray-800">
+        {pageTitle}
+      </h1>
 
       {/* RIGHT SIDE */}
       <div className="flex items-center gap-6">
+
         {/* REPORTS DROPDOWN */}
         <div className="relative">
           <button
@@ -26,6 +30,7 @@ export default function Header() {
 
           {openReports && (
             <div className="absolute right-0 mt-2 w-64 bg-white shadow-xl border rounded-xl py-2 z-50">
+
               <ReportItem text="Institution Location" />
               <ReportItem text="Visit Reports" />
               <ReportItem text="Sub-Meter Reports" />

@@ -11,7 +11,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import { Link, useLocation } from "react-router-dom";
-import { usePageTitle } from "../../context/PageTitleContext";
+import { usePageTitle } from "../context/PageTitleContext";
 
 const modules = [
   { name: "Distance", path: "/distance", icon: <FiGrid size={20} /> },
@@ -24,20 +24,12 @@ const modules = [
     icon: <FiMapPin size={20} />,
   },
   {
-    name: "GActivity : New Asset Transaction List",
+    name: "New Asset Transaction List",
     path: "/asset-transactions",
     icon: <FiUsers size={20} />,
   },
-  {
-    name: "User Active & De-Active",
-    path: "/useractive",
-    icon: <FiSettings size={20} />,
-  },
-  {
-    name: "Class Run Status",
-    path: "/class-status",
-    icon: <FiHelpCircle size={20} />,
-  },
+  { name: "User Active & De-Active", path: "/useractive", icon: <FiSettings size={20} /> },
+  { name: "Class Run Status", path: "/class-status", icon: <FiHelpCircle size={20} /> },
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
@@ -75,11 +67,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                 className={`
                   w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm
                   transition-all
-                  ${
-                    isActive
-                      ? "bg-blue-100 text-blue-700 font-semibold"
-                      : "hover:bg-gray-100"
-                  }
+                  ${isActive ? "bg-blue-100 text-blue-700 font-semibold" : "hover:bg-gray-100"}
                 `}
               >
                 {item.icon}
@@ -109,11 +97,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
           onClick={() => setCollapsed(!collapsed)}
           className="p-2 rounded hover:bg-gray-100 transition"
         >
-          {collapsed ? (
-            <FiChevronRight size={20} />
-          ) : (
-            <FiChevronLeft size={20} />
-          )}
+          {collapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
         </button>
       </div>
     </aside>
