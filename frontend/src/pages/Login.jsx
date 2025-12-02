@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login({ onLogin }) {
   const [user, setUser] = useState("");
@@ -10,7 +11,7 @@ export default function Login({ onLogin }) {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!user.trim() || !password.trim()) {
@@ -20,11 +21,29 @@ export default function Login({ onLogin }) {
 
     setError("");
 
-    // update login state in App.jsx
-    onLogin();
+    try {
+      const res = await axios.post("http://localhost:5000/api/auth/login", {
+        email: user,      // backend expects email
+        password: password,
+      });
 
-    // redirect to dashboard
-    navigate("/dashboard");
+      // Save token & user in localStorage
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // update login state in App.jsx
+      if (onLogin) onLogin();
+
+      // redirect to dashboard
+      navigate("/dashboard");
+
+    } catch (err) {
+      if (err.response) {
+        setError(err.response.data.message || "Login failed");
+      } else {
+        setError("Server not reachable");
+      }
+    }
   };
 
   return (
