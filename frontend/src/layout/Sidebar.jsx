@@ -9,32 +9,42 @@ import {
   FiHelpCircle,
   FiChevronLeft,
   FiChevronRight,
+  FiLogOut,
 } from "react-icons/fi";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePageTitle } from "../context/PageTitleContext";
 
 const modules = [
-  { name: "Distance", path: "/distance", icon: <FiGrid size={20} /> },
+  { name: "Dashboard", path: "/dashboard", icon: <FiGrid size={20} /> },
+  { name: "Distance", path: "/distance", icon: <FiMapPin size={20} /> },
   { name: "Expenses List", path: "/expenses", icon: <FiFileText size={20} /> },
   { name: "Task List", path: "/tasks", icon: <FiList size={20} /> },
   { name: "Activity", path: "/activity", icon: <FiMapPin size={20} /> },
   {
     name: "Technical Executive Day Summary",
     path: "/tech-summary",
-    icon: <FiMapPin size={20} />,
+    icon: <FiHelpCircle size={20} />,
   },
   {
     name: "New Asset Transaction List",
     path: "/asset-transactions",
     icon: <FiUsers size={20} />,
   },
-  { name: "User Active & De-Active", path: "/useractive", icon: <FiSettings size={20} /> },
+  { name: "User Active & De-Active", path: "/user-status", icon: <FiSettings size={20} /> },
   { name: "Class Run Status", path: "/class-status", icon: <FiHelpCircle size={20} /> },
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
   const { setPageTitle } = usePageTitle();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+    window.location.reload();
+  };
 
   return (
     <aside
@@ -43,7 +53,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
         bg-white border-r shadow-sm h-full flex flex-col transition-all duration-300 relative
       `}
     >
-      {/* Logo Section */}
+      {/* Logo */}
       <div className="p-4 border-b flex items-center justify-center">
         {!collapsed ? (
           <h2 className="text-lg font-bold text-gray-800">GActivity</h2>
@@ -54,7 +64,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
         )}
       </div>
 
-      {/* Navigation */}
+      {/* Modules Navigation */}
       <nav className="flex-1 p-3 space-y-1">
         {modules.map((item, idx) => {
           const isActive = location.pathname === item.path;
@@ -65,8 +75,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                 to={item.path}
                 onClick={() => setPageTitle(item.name)}
                 className={`
-                  w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm
-                  transition-all
+                  w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all
                   ${isActive ? "bg-blue-100 text-blue-700 font-semibold" : "hover:bg-gray-100"}
                 `}
               >
@@ -91,7 +100,18 @@ export default function Sidebar({ collapsed, setCollapsed }) {
         })}
       </nav>
 
-      {/* Collapse Button */}
+      {/* Logout Button */}
+      <div className="p-3 border-t flex justify-center">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2 p-2 rounded hover:bg-gray-100 transition text-sm"
+        >
+          <FiLogOut size={20} />
+          {!collapsed && <span>Logout</span>}
+        </button>
+      </div>
+
+      {/* Sidebar Collapse Button */}
       <div className="p-3 border-t flex justify-center">
         <button
           onClick={() => setCollapsed(!collapsed)}

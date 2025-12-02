@@ -40,6 +40,7 @@ export default function Login({ onLogin }) {
     } catch (err) {
       if (err.response) {
         setError(err.response.data.message || "Login failed");
+        navigate("/");
       } else {
         setError("Server not reachable");
       }

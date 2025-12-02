@@ -106,10 +106,14 @@ export default function TaskListFilter() {
       </div>
 
       {/* RIGHT EXPORT BUTTON */}
-      <button className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700">
-        <FaFileExcel />
-      </button>
-
+       <div className="flex justify-end lg:mt-2 mt-4">
+        <button className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700 whitespace-nowrap">
+          <FaFileExcel />
+          Export Excel
+        </button>
+      </div>
     </div>
+
+ 
   );
 }

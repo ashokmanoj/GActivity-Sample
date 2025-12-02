@@ -51,7 +51,9 @@ export default function Header() {
 
         {/* USER ICON */}
         <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center">
-          <FiUser size={18} />
+          <button>
+            <FiUser size={18} />
+          </button>
         </div>
       </div>
     </header>

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/Login";
 import DashboardLayout from "./layout/DashboardLayout";
+
 import Dashboard from "./pages/Dashboard";
 import Distance from "./pages/Distance";
 import Expenses from "./pages/Expenses";
@@ -13,24 +14,21 @@ import NewAsset from "./pages/AssetTransactions";
 import UserActive from "./pages/UserStatus";
 import ClassStatus from "./pages/ClassStatus";
 
+import ProtectedRoute from "./ProtectedRoute";
+
 export default function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  // Auto-login if token exists
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setLoggedIn(!!token);
-  }, []);
-
   return (
     <Routes>
-      {/* LOGIN PAGE */}
-      <Route path="/" element={<Login onLogin={() => setLoggedIn(true)} />} />
 
-      {/* PROTECTED ROUTES */}
+      {/* LOGIN (Public) */}
+      <Route path="/" element={<Login />} />
+
+      {/* PROTECTED SECTION */}
       <Route
         element={
-          loggedIn ? <DashboardLayout /> : <Navigate to="/" replace />
+          <ProtectedRoute>
+            <DashboardLayout />
+          </ProtectedRoute>
         }
       >
         <Route path="/dashboard" element={<Dashboard />} />
@@ -44,11 +42,9 @@ export default function App() {
         <Route path="/class-status" element={<ClassStatus />} />
       </Route>
 
-      {/* CATCH ALL */}
-      <Route
-        path="*"
-        element={<Navigate to={loggedIn ? "/dashboard" : "/"} />}
-      />
+      {/* HANDLE UNKNOWN ROUTES */}
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+
     </Routes>
   );
 }
