@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { FiChevronDown, FiFileText, FiUser } from "react-icons/fi";
-import { usePageTitle } from "../context/PageTitleContext";  
+import { FiChevronDown, FiFileText, FiUser, FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { usePageTitle } from "../context/PageTitleContext";
 
 export default function Header() {
   const { pageTitle } = usePageTitle();
   const [openReports, setOpenReports] = useState(false);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear token
+    navigate("/"); // Redirect to login
+  };
 
   return (
     <header className="w-full h-16 bg-white border-b shadow-sm flex items-center justify-between px-6 relative">
@@ -49,13 +58,37 @@ export default function Header() {
           )}
         </div>
 
-        {/* USER ICON */}
-        <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center">
-          <button>
+        {/* USER ICON + LOGOUT */}
+        <div className="relative">
+          <div
+            onClick={() => setOpenUserMenu(!openUserMenu)}
+            className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-300"
+          >
             <FiUser size={18} />
-          </button>
+          </div>
+
+          {openUserMenu && (
+            <div className="absolute right-0 mt-2 w-40 bg-white border shadow-xl rounded-xl py-2 z-50">
+
+              {/* PROFILE VIEW (Optional) */}
+              <button className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center gap-2">
+                <FiUser size={16} /> Profile
+              </button>
+
+              {/* LOGOUT BUTTON */}
+              <button
+                onClick={handleLogout}
+                className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 flex items-center gap-2"
+              >
+                <FiLogOut size={16} /> Logout
+              </button>
+
+            </div>
+          )}
         </div>
+
       </div>
+
     </header>
   );
 }
