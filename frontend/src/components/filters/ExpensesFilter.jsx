@@ -5,7 +5,7 @@ import Dropdown from "../common/Dropdown";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 
-export default function ExpensesFilter() {
+export default function ExpensesFilter({ onSearch }) {
   const [rm, setRM] = useState("All RM");
   const [designation, setDesignation] = useState("All Designation");
   const [executive, setExecutive] = useState("All Executive");
@@ -14,6 +14,7 @@ export default function ExpensesFilter() {
 
   const [dateMenuOpen, setDateMenuOpen] = useState(false);
   const [selectStep, setSelectStep] = useState(0);
+
   const [dateRange, setDateRange] = useState([
     { startDate: new Date(), endDate: new Date(), key: "selection" }
   ]);
@@ -25,12 +26,25 @@ export default function ExpensesFilter() {
 
   const handleDateChange = (item) => {
     setDateRange([item.selection]);
-
     if (selectStep === 0) setSelectStep(1);
     else {
       setSelectStep(0);
       setDateMenuOpen(false);
     }
+  };
+
+  const handleSearch = () => {
+    const filters = {
+      rm: rm !== "All RM" ? rm : "",
+      designation: designation !== "All Designation" ? designation : "",
+      executive: executive !== "All Executive" ? executive : "",
+      allFilter: allFilter !== "-- All --" ? allFilter : "",
+      status: status !== "All Status" ? status : "",
+      startDate: format(dateRange[0].startDate, "yyyy-MM-dd"),
+      endDate: format(dateRange[0].endDate, "yyyy-MM-dd"),
+    };
+
+    onSearch(filters); // Send filters to parent
   };
 
   return (
@@ -68,7 +82,10 @@ export default function ExpensesFilter() {
         </div>
 
         {/* SEARCH BUTTON */}
-        <button className="bg-blue-600 text-white px-5 py-2 rounded-md shadow hover:bg-blue-700 transition">
+        <button
+          onClick={handleSearch}
+          className="bg-blue-600 text-white px-5 py-2 rounded-md shadow hover:bg-blue-700 transition"
+        >
           Search
         </button>
       </div>
