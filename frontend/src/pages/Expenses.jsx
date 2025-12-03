@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import ExpensesFilter from "../components/filters/ExpensesFilter";
 import ExpensesTable from "../components/common/ExpensesTable";
 import { fetchExpenses, exportExpenses } from "../api/expensesApi";
+import { FaFileExcel } from "react-icons/fa";
 // import { saveAs } from "file-saver"; // optional; we will fallback if not installed
 
 export default function Expenses() {
   const [rows, setRows] = useState([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
-  const [limit] = useState(10 );
+  const [limit] = useState(12);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({});
@@ -109,9 +110,9 @@ export default function Expenses() {
         <div className="flex items-center gap-2">
           <button
             onClick={handleExport}
-            className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700"
-          >
-            Export Excel
+            className="bg-green-600 text-white px-2 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700"
+          ><FaFileExcel size={15} />
+            Export
           </button>
         </div>
       </div>

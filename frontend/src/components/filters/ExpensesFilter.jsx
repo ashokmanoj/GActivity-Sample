@@ -91,9 +91,9 @@ export default function ExpensesFilter({ onSearch }) {
       </div>
 
       {/* RIGHT EXCEL BUTTON */}
-      <button className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700">
+      {/* <button className="bg-green-600 text-white px-4 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700">
         <FaFileExcel />
-      </button>
+      </button> */}
     </div>
   );
 }
