@@ -56,7 +56,7 @@ export default function Expenses() {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `expenses_${new Date().toISOString().slice(0,10)}.xlsx`;
+        a.download = `expenses_${new Date().toISOString().slice(0, 10)}.xlsx`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -66,7 +66,7 @@ export default function Expenses() {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = `expenses_${new Date().toISOString().slice(0,10)}.xlsx`;
+        a.download = `expenses_${new Date().toISOString().slice(0, 10)}.xlsx`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -111,7 +111,8 @@ export default function Expenses() {
           <button
             onClick={handleExport}
             className="bg-green-600 text-white px-2 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700"
-          ><FaFileExcel size={15} />
+          >
+            <FaFileExcel size={15} />
             Export
           </button>
         </div>
@@ -123,7 +124,9 @@ export default function Expenses() {
       </div>
 
       {loading ? (
-        <div className="bg-white p-6 rounded shadow text-center">Loading...</div>
+        <div className="bg-white p-6 rounded shadow text-center">
+          Loading...
+        </div>
       ) : (
         <ExpensesTable data={rows} onBillDateClick={handleBillClick} />
       )}
@@ -132,9 +135,23 @@ export default function Expenses() {
       <div className="flex items-center justify-between mt-3">
         {/* <div className="text-sm text-gray-600">Total: {total}</div> */}
         <div className="flex items-center gap-2">
-          <button onClick={goPrev} disabled={page <= 1} className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50">Prev</button>
-          <div className="text-sm">Page {page} / {totalPages}</div>
-          <button onClick={goNext} disabled={page >= totalPages} className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50">Next</button>
+          <button
+            onClick={goPrev}
+            disabled={page <= 1}
+            className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50"
+          >
+            Prev
+          </button>
+          <div className="text-sm">
+            Page {page} / {totalPages}
+          </div>
+          <button
+            onClick={goNext}
+            disabled={page >= totalPages}
+            className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50"
+          >
+            Next
+          </button>
         </div>
       </div>
 
@@ -144,23 +161,49 @@ export default function Expenses() {
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold">Bill Details</h3>
-              <button onClick={handleCloseModal} className="text-gray-600">Close</button>
+              <button onClick={handleCloseModal} className="text-gray-600">
+                Close
+              </button>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div><strong>Billdate:</strong> {new Date(selectedRow.billdate).toLocaleDateString()}</div>
-              <div><strong>Executive:</strong> {selectedRow.executive_name}</div>
-              <div><strong>Mobile:</strong> {selectedRow.mobile}</div>
-              <div><strong>No of Bill:</strong> {selectedRow.no_of_bill}</div>
-              <div><strong>Req Amount:</strong> {selectedRow.req_amount}</div>
-              <div><strong>RM Amount:</strong> {selectedRow.rm_amount}</div>
-              <div><strong>RMH Amount:</strong> {selectedRow.rmh_amount}</div>
-              <div><strong>Account:</strong> {selectedRow.account}</div>
-              <div><strong>Status:</strong> {selectedRow.status}</div>
+              <div>
+                <strong>Billdate:</strong>{" "}
+                {new Date(selectedRow.billdate).toLocaleDateString()}
+              </div>
+              <div>
+                <strong>Executive:</strong> {selectedRow.executive_name}
+              </div>
+              <div>
+                <strong>Mobile:</strong> {selectedRow.mobile}
+              </div>
+              <div>
+                <strong>No of Bill:</strong> {selectedRow.no_of_bill}
+              </div>
+              <div>
+                <strong>Req Amount:</strong> {selectedRow.req_amount}
+              </div>
+              <div>
+                <strong>RM Amount:</strong> {selectedRow.rm_amount}
+              </div>
+              <div>
+                <strong>RMH Amount:</strong> {selectedRow.rmh_amount}
+              </div>
+              <div>
+                <strong>Account:</strong> {selectedRow.account}
+              </div>
+              <div>
+                <strong>Status:</strong> {selectedRow.status}
+              </div>
             </div>
 
             <div className="mt-4 flex justify-end">
-              <button onClick={handleCloseModal} className="px-4 py-2 bg-blue-600 text-white rounded">Close</button>
+              <button
+                onClick={handleCloseModal}
+                className="px-4 py-2 bg-blue-600 text-white rounded"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>

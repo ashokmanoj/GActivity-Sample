@@ -24,10 +24,7 @@ export default function ExpensesTable({ data = [], onBillDateClick }) {
         <tbody>
           {data.length === 0 ? (
             <tr>
-              <td
-                colSpan="10"
-                className="py-6 text-center text-gray-400"
-              >
+              <td colSpan="10" className="py-6 text-center text-gray-400">
                 No records found
               </td>
             </tr>
@@ -35,7 +32,9 @@ export default function ExpensesTable({ data = [], onBillDateClick }) {
             data.map((row, idx) => (
               <tr
                 key={row.id}
-                className={`border-t ${idx % 2 === 0 ? "bg-white" : "bg-gray-50"}`}
+                className={`border-t ${
+                  idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                }`}
               >
                 {/* SL NO */}
                 <td className="px-4 py-3">{row.id}</td>
@@ -54,7 +53,9 @@ export default function ExpensesTable({ data = [], onBillDateClick }) {
 
                 {/* Executive Name */}
                 <td className="px-4 py-3">
-                  <span className="font-medium text-gray-800">{row.executive_name}</span>
+                  <span className="font-medium text-gray-800">
+                    {row.executive_name}
+                  </span>
                   <span className="text-gray-500"> : {row.mobile}</span>
                 </td>
 

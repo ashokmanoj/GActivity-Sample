@@ -3,7 +3,8 @@ import pool from "../config/db.js";
 import ExcelJS from "exceljs";
 
 const buildFilterQuery = (queryParams) => {
-  const { rm, designation, executive, allFilter, status, startDate, endDate } = queryParams;
+  const { rm, designation, executive, allFilter, status, startDate, endDate } =
+    queryParams;
   let sql = "WHERE 1=1";
   const params = [];
 
@@ -51,7 +52,9 @@ export const getExpensesReport = async (req, res) => {
     const total = parseInt(countRes.rows[0].count, 10);
 
     // main data
-    const dataQuery = `SELECT * FROM expenses_report ${sql} ORDER BY id ASC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
+    const dataQuery = `SELECT * FROM expenses_report ${sql} ORDER BY id ASC LIMIT $${
+      params.length + 1
+    } OFFSET $${params.length + 2}`;
     const dataParams = params.concat([limit, offset]);
     const dataRes = await pool.query(dataQuery, dataParams);
 
@@ -116,8 +119,14 @@ export const exportExpensesReport = async (req, res) => {
     sheet.getRow(1).font = { bold: true };
 
     // Write to buffer and send
-    res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-    res.setHeader("Content-Disposition", `attachment; filename="expenses_report.xlsx"`);
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="expenses_report.xlsx"`
+    );
 
     await workbook.xlsx.write(res);
     res.end();
