@@ -7,8 +7,6 @@ import {
   FiUsers,
   FiSettings,
   FiHelpCircle,
-  FiChevronLeft,
-  FiChevronRight,
   FiLogOut,
 } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -30,8 +28,16 @@ const modules = [
     path: "/asset-transactions",
     icon: <FiUsers size={20} />,
   },
-  { name: "User Active & De-Active", path: "/user-status", icon: <FiSettings size={20} /> },
-  { name: "Class Run Status", path: "/class-status", icon: <FiHelpCircle size={20} /> },
+  {
+    name: "User Active & De-Active",
+    path: "/user-status",
+    icon: <FiSettings size={20} />,
+  },
+  {
+    name: "Class Run Status",
+    path: "/class-status",
+    icon: <FiHelpCircle size={20} />,
+  },
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
@@ -49,23 +55,27 @@ export default function Sidebar({ collapsed, setCollapsed }) {
   return (
     <aside
       className={`
+        fixed top-0 left-0 h-full
         ${collapsed ? "w-16" : "w-64"}
-        bg-white border-r shadow-sm h-full flex flex-col transition-all duration-300 relative
+        bg-white border-r shadow-xl
+        transition-all duration-300 z-50
       `}
+      onMouseEnter={() => setCollapsed(false)}
+      onMouseLeave={() => setCollapsed(true)}
     >
-      {/* Logo */}
+      {/* Logo Section */}
       <div className="p-4 border-b flex items-center justify-center">
         {!collapsed ? (
           <h2 className="text-lg font-bold text-gray-800">GActivity</h2>
         ) : (
           <div className="w-9 h-9 bg-blue-600 text-white flex items-center justify-center rounded-full font-bold">
-            G
+            GA
           </div>
         )}
       </div>
 
-      {/* Modules Navigation */}
-      <nav className="flex-1 p-3 space-y-1">
+      {/* Navigation Menu */}
+      <nav className="sidebar-scroll flex-1 p-3 space-y-1 overflow-y-auto">
         {modules.map((item, idx) => {
           const isActive = location.pathname === item.path;
 
@@ -76,20 +86,24 @@ export default function Sidebar({ collapsed, setCollapsed }) {
                 onClick={() => setPageTitle(item.name)}
                 className={`
                   w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all
-                  ${isActive ? "bg-blue-100 text-blue-700 font-semibold" : "hover:bg-gray-100"}
+                  ${
+                    isActive
+                      ? "bg-blue-100 text-blue-700 font-semibold"
+                      : "hover:bg-gray-100"
+                  }
                 `}
               >
                 {item.icon}
                 {!collapsed && <span>{item.name}</span>}
               </Link>
 
-              {/* Tooltip when collapsed */}
+              {/* Tooltip for collapsed menu */}
               {collapsed && (
                 <span
                   className="
                     absolute left-14 top-1/2 -translate-y-1/2
                     bg-black text-white text-xs px-2 py-1 rounded shadow opacity-0 
-                    group-hover:opacity-100 transition ml-2 whitespace-nowrap z-50
+                    group-hover:opacity-100 transition ml-2 whitespace-nowrap z-[999]
                   "
                 >
                   {item.name}
@@ -108,16 +122,6 @@ export default function Sidebar({ collapsed, setCollapsed }) {
         >
           <FiLogOut size={20} />
           {!collapsed && <span>Logout</span>}
-        </button>
-      </div>
-
-      {/* Sidebar Collapse Button */}
-      <div className="p-3 border-t flex justify-center">
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="p-2 rounded hover:bg-gray-100 transition"
-        >
-          {collapsed ? <FiChevronRight size={20} /> : <FiChevronLeft size={20} />}
         </button>
       </div>
     </aside>
