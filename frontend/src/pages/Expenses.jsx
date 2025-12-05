@@ -1,21 +1,22 @@
-// src/pages/Expenses.jsx
 import React, { useState, useEffect } from "react";
 import ExpensesFilter from "../components/filters/ExpensesFilter";
+import FilterBar from "../components/common/FilterBar";
 import ExpensesTable from "../components/common/ExpensesTable";
 import { fetchExpenses, exportExpenses } from "../api/expensesApi";
 import { FaFileExcel } from "react-icons/fa";
-// import { saveAs } from "file-saver"; // optional; we will fallback if not installed
+import Pagination from "../components/common/Pagination";
 
 export default function Expenses() {
   const [rows, setRows] = useState([]);
   const [total, setTotal] = useState(0);
+
   const [page, setPage] = useState(1);
-  const [limit] = useState(12);
+  const limit = 12; // rows per page
+
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
   const [filters, setFilters] = useState({});
 
-  // popup state for bill details
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
@@ -23,10 +24,12 @@ export default function Expenses() {
     setLoading(true);
     try {
       const payload = await fetchExpenses({ ...f, page: p, limit });
+
       setRows(payload.rows || []);
       setTotal(payload.total || 0);
       setTotalPages(payload.totalPages || 1);
-      setPage(payload.page || 1);
+
+      setPage(payload.page || p);
     } catch (err) {
       console.error("Failed to fetch expenses", err);
     } finally {
@@ -36,7 +39,6 @@ export default function Expenses() {
 
   useEffect(() => {
     loadData();
-    // eslint-disable-next-line
   }, []);
 
   const handleSearch = (newFilters) => {
@@ -48,30 +50,16 @@ export default function Expenses() {
   const handleExport = async () => {
     try {
       const blob = await exportExpenses(filters);
-      // try using file-saver if available
-      try {
-        // if file-saver installed
-        // saveAs(blob, `expenses_${new Date().toISOString().slice(0,10)}.xlsx`);
-        // fallback if not installed:
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `expenses_${new Date().toISOString().slice(0, 10)}.xlsx`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-      } catch (e) {
-        // fallback
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `expenses_${new Date().toISOString().slice(0, 10)}.xlsx`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        window.URL.revokeObjectURL(url);
-      }
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `expenses_${new Date().toISOString().slice(0, 10)}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      window.URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Export failed", err);
       alert("Export failed");
@@ -88,41 +76,64 @@ export default function Expenses() {
     setSelectedRow(null);
   };
 
-  const goPrev = () => {
-    if (page > 1) {
-      const np = page - 1;
-      setPage(np);
-      loadData(filters, np);
-    }
+  // FIXED PAGINATION LOGIC (correct version)
+  const setPageMove = (newPage) => {
+    if (newPage < 1 || newPage > totalPages) return;
+
+    setPage(newPage);
+    loadData(filters, newPage);
   };
-  const goNext = () => {
-    if (page < totalPages) {
-      const np = page + 1;
-      setPage(np);
-      loadData(filters, np);
-    }
-  };
+
+  // Filter options
+  const rm = ["BIKSHA"];
+  const alldesignation = [
+    "All Designation",
+    "Technical Executive",
+    "Installation Interns",
+    "Computer Operator",
+  ];
+  const allExecutive = [
+    "All Executive",
+    "Anupam Dutta : 9613705280",
+    "Rohit Sharma : 9876543210",
+  ];
+  const expence = ["-- All --", "Expenses", "Advance"];
+  const status = ["-- All Status --", "Pending", "Approved", "Rejected"];
 
   return (
     <div className="p-4 space-y-4">
-      <div className="flex items-center justify-between gap-4">
-        <ExpensesFilter onSearch={handleSearch} />
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleExport}
-            className="bg-green-600 text-white px-2 py-2 rounded-md flex items-center gap-2 shadow hover:bg-green-700"
-          >
-            <FaFileExcel size={15} />
-            Export
-          </button>
-        </div>
+      {/* FILTER BAR + EXPORT BUTTON */}
+      <div className="flex items-center justify-between">
+        <FilterBar
+          onSearch={handleSearch}
+          singleDate={false}
+          enableDateRange={true}
+          filters={[
+            { lable: "RM", options: rm, key: "rm" },
+            {
+              lable: "Designation",
+              options: alldesignation,
+              key: "designation",
+            },
+            { lable: "Executive", options: allExecutive, key: "executive" },
+            { lable: "Expence", options: expence, key: "expence" },
+            { lable: "Status", options: status, key: "status" },
+          ]}
+          enableExport={false}
+        />
+
+        <button
+          onClick={handleExport}
+          className="bg-green-600 text-white px-3 py-2 rounded-md flex items-center gap-2 hover:bg-green-700"
+        >
+          <FaFileExcel size={16} /> Export
+        </button>
       </div>
 
-      <div className="flex items-center justify-between gap-4">
-        <div className="text-lg font-semibold">TotalExpenses : {total}</div>
-        {/* <div className="text-sm text-gray-600">Total: </div> */}
-      </div>
+      {/* TOTAL EXPENSES */}
+      <div className="text-lg font-semibold">Total Expenses: {total}</div>
 
+      {/* TABLE */}
       {loading ? (
         <div className="bg-white p-6 rounded shadow text-center">
           Loading...
@@ -131,31 +142,15 @@ export default function Expenses() {
         <ExpensesTable data={rows} onBillDateClick={handleBillClick} />
       )}
 
-      {/* Pagination */}
-      <div className="flex items-center justify-between mt-3">
-        {/* <div className="text-sm text-gray-600">Total: {total}</div> */}
-        <div className="flex items-center gap-2">
-          <button
-            onClick={goPrev}
-            disabled={page <= 1}
-            className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50"
-          >
-            Prev
-          </button>
-          <div className="text-sm">
-            Page {page} / {totalPages}
-          </div>
-          <button
-            onClick={goNext}
-            disabled={page >= totalPages}
-            className="px-3 py-1 bg-gray-100 rounded disabled:opacity-50"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      {/* PAGINATION */}
+      <Pagination
+        currentPage={page}
+        totalItems={total}
+        pageSize={limit}
+        onPageChange={setPageMove}
+      />
 
-      {/* Modal for Bill Detail */}
+      {/* BILL DETAILS POPUP */}
       {modalOpen && selectedRow && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white rounded-lg p-6 w-full max-w-2xl">
@@ -168,7 +163,7 @@ export default function Expenses() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <strong>Billdate:</strong>{" "}
+                <strong>Bill Date:</strong>{" "}
                 {new Date(selectedRow.billdate).toLocaleDateString()}
               </div>
               <div>
