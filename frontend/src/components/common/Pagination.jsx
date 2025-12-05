@@ -47,7 +47,6 @@ export default function Pagination({
 
   return (
     <div className="flex items-center justify-center gap-2 mt-6 select-none">
-
       {/* Previous Button */}
       <button
         disabled={currentPage === 1}
