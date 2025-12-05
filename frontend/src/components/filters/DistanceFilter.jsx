@@ -76,10 +76,7 @@ export default function DistanceFilter() {
         </button>
       </div>
 
-      {/* RIGHT SIDE */}
-      <button className="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600">
-        Expand All Image
-      </button>
+      
     </div>
   );
 }
