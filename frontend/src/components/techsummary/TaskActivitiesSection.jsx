@@ -1,5 +1,5 @@
 import React from "react";
-import usePagination from "../../utils/usePagination";
+// import usePagination from "../../utils/usePagination";
 import TaskActivitiesPhoto from "./TaskActivitiesPhoto";
 
 export default function TaskActivitiesSection({ summary }) {

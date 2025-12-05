@@ -1,5 +1,5 @@
 import React from "react";
-import usePagination from "../../utils/usePagination";
+// import usePagination from "../../utils/usePagination";
 
 export default function ClassRunStatusSection({ summary }) {
   const { page, totalPages, currentData, goNext, goPrev } = usePagination(
