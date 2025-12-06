@@ -15,6 +15,7 @@ import UserActive from "./pages/UserStatus";
 import ClassStatus from "./pages/ClassStatus";
 
 import ProtectedRoute from "./ProtectedRoute";
+import UserRouteMapPage from "./pages/UserRouteMapPage";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/asset-transactions" element={<NewAsset />} />
         <Route path="/user-status" element={<UserActive />} />
         <Route path="/class-status" element={<ClassStatus />} />
+        <Route path="/UserRouteMapPage" element={<UserRouteMapPage />} />
       </Route>
 
       {/* HANDLE UNKNOWN ROUTES */}

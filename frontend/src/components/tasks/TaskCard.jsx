@@ -14,6 +14,7 @@ export default function TaskCard({ task }) {
   const [zoom, setZoom] = useState(1);
   const [rotate, setRotate] = useState(0);
 
+  // Open Popup
   const openPopup = (index) => {
     setPopupIndex(index);
     setZoom(1);
@@ -21,18 +22,21 @@ export default function TaskCard({ task }) {
     setShowPopup(true);
   };
 
+  // Close Popup
   const closePopup = () => {
     setShowPopup(false);
     setZoom(1);
     setRotate(0);
   };
 
+  // Next Image
   const nextImage = () => {
     setPopupIndex((prev) => (prev + 1) % task.images.length);
     setZoom(1);
     setRotate(0);
   };
 
+  // Previous Image
   const prevImage = () => {
     setPopupIndex((prev) =>
       prev === 0 ? task.images.length - 1 : prev - 1
@@ -45,7 +49,7 @@ export default function TaskCard({ task }) {
     <>
       {/* ==== TASK CARD ==== */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 bg-white rounded-xl shadow border p-6">
-        
+
         {/* LEFT SECTION */}
         <div className="lg:col-span-2">
           <div className="flex justify-between">
@@ -126,67 +130,82 @@ export default function TaskCard({ task }) {
         </div>
       </div>
 
-      {/* ==== BEAUTIFUL POPUP VIEWER ==== */}
-{showPopup && (
-  <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+      {/* ==== POPUP VIEWER WITH MOUSE ZOOM ==== */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
 
-    {/* Close Button — FIXED & ALWAYS VISIBLE */}
-    <button
-      onClick={closePopup}
-      className="fixed top-6 right-6 bg-white/90 backdrop-blur p-3 rounded-full shadow-xl hover:bg-white transition z-[999]"
-    >
-      <FiX size={22} />
-    </button>
+          {/* Close Button */}
+          <button
+            onClick={closePopup}
+            className="fixed top-6 right-6 bg-white/90 backdrop-blur p-3 rounded-full shadow-xl hover:bg-white transition z-[999]"
+          >
+            <FiX size={22} />
+          </button>
 
-    {/* LEFT ARROW — MOVED TO SCREEN EDGE */}
-    <button
-      onClick={prevImage}
-      className="fixed left-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur p-3 rounded-full shadow-xl hover:bg-white transition z-[999]"
-    >
-      <FiChevronLeft size={22} />
-    </button>
+          {/* Left Arrow */}
+          <button
+            onClick={prevImage}
+            className="fixed left-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur p-3 rounded-full shadow-xl hover:bg-white transition z-[999]"
+          >
+            <FiChevronLeft size={22} />
+          </button>
 
-    {/* RIGHT ARROW — MOVED TO SCREEN EDGE */}
-    <button
-      onClick={nextImage}
-      className="fixed right-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur p-3 rounded-full shadow-xl hover:bg-white transition z-[999]"
-    >
-      <FiChevronRight size={22} />
-    </button>
+          {/* Right Arrow */}
+          <button
+            onClick={nextImage}
+            className="fixed right-6 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur p-3 rounded-full shadow-xl hover:bg-white transition z-[999]"
+          >
+            <FiChevronRight size={22} />
+          </button>
 
-    {/* MAIN ZOOM AREA */}
-    <div className="max-w-[95%] max-h-[90%] flex flex-col items-center">
+          {/* Image Viewer Area */}
+          <div
+            className="max-w-[95%] max-h-[90%] flex flex-col items-center"
+            onWheel={(e) => {
+              e.preventDefault();
+              if (e.deltaY < 0) {
+                setZoom((z) => Math.min(z + 0.1, 4)); // Zoom In
+              } else {
+                setZoom((z) => Math.max(z - 0.1, 0.5)); // Zoom Out
+              }
+            }}
+          >
+            <img
+              src={task.images[popupIndex]}
+              style={{
+                transform: `scale(${zoom}) rotate(${rotate}deg)`,
+                transition: "transform 0.15s ease-out",
+              }}
+              className="max-w-[100%] max-h-[80vh] rounded-xl shadow-lg select-none"
+              draggable={false}
+            />
 
-      {/* IMAGE */}
-      <img
-        src={task.images[popupIndex]}
-        style={{ transform: `scale(${zoom}) rotate(${rotate}deg)` }}
-        className="max-w-[100%] max-h-[80vh] rounded-xl shadow-lg transition-transform duration-200"
-      />
+            {/* Control Buttons */}
+            <div className="flex gap-5 mt-6 bg-white/90 backdrop-blur px-6 py-3 rounded-full shadow-lg z-[900]">
+              <button onClick={() => setZoom((z) => Math.min(z + 0.2, 4))}>
+                <FiZoomIn size={22} />
+              </button>
 
-      {/* CONTROL BAR — MOVED DOWN & CLEAN */}
-      <div className="flex gap-5 mt-6 bg-white/90 backdrop-blur px-6 py-3 rounded-full shadow-lg z-[900]">
-        <button onClick={() => setZoom(zoom + 0.2)}>
-          <FiZoomIn size={22} />
-        </button>
+              <button onClick={() => setZoom((z) => Math.max(z - 0.2, 0.5))}>
+                <FiZoomOut size={22} />
+              </button>
 
-        <button onClick={() => setZoom(Math.max(0.4, zoom - 0.2))}>
-          <FiZoomOut size={22} />
-        </button>
+              <button onClick={() => setRotate((r) => r + 90)}>
+                <FiRotateCw size={22} />
+              </button>
 
-        <button onClick={() => setRotate(rotate + 90)}>
-          <FiRotateCw size={22} />
-        </button>
-
-        <button onClick={() => { setZoom(1); setRotate(0); }}>
-          <FiX size={16} />
-        </button>
-      </div>
-
-    </div>
-  </div>
-)}
-
+              <button
+                onClick={() => {
+                  setZoom(1);
+                  setRotate(0);
+                }}
+              >
+                <FiX size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

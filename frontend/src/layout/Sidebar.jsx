@@ -8,6 +8,7 @@ import {
   FiSettings,
   FiHelpCircle,
   FiLogOut,
+  FiMap,
 } from "react-icons/fi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { usePageTitle } from "../context/PageTitleContext";
@@ -37,6 +38,11 @@ const modules = [
     name: "Class Run Status",
     path: "/class-status",
     icon: <FiHelpCircle size={20} />,
+  },
+  {
+    name: "User Route Map",
+    path: "/UserRouteMapPage",
+    icon: <FiMap size={20} />,
   },
 ];
 
