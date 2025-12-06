@@ -181,7 +181,7 @@ export default function TaskCard({ task }) {
             />
 
             {/* Control Buttons */}
-            <div className="flex gap-5 mt-6 bg-white/90 backdrop-blur px-6 py-3 rounded-full shadow-lg z-[900]">
+            <div className="flex gap-5 mt-24 bg-white/90 backdrop-blur px-6 py-3 rounded-full shadow-lg z-[900]">
               <button onClick={() => setZoom((z) => Math.min(z + 0.2, 4))}>
                 <FiZoomIn size={22} />
               </button>
