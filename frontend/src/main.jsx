@@ -6,22 +6,25 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { PageTitleProvider } from "./context/PageTitleContext";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
+import "react-toastify/dist/ReactToastify.css";
+import { ThemeProvider } from "./context/ThemeContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <PageTitleProvider>
-      <App />
-      <ToastContainer
-      position="top-center"
-      autoClose={3000}
-      hideProgressBar={false}
-      newestOnTop
-      closeOnClick
-      pauseOnHover
-      draggable
-      theme="colored"
-    />
-    </PageTitleProvider>
+    <ThemeProvider>
+      <PageTitleProvider>
+        <App />
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop
+          closeOnClick
+          pauseOnHover
+          draggable
+          theme="colored"
+        />
+      </PageTitleProvider>
+    </ThemeProvider>
   </BrowserRouter>
 );
