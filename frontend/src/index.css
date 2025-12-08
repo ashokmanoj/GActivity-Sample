@@ -47,3 +47,7 @@
 .animate-toast-enter {
   animation: toast-enter-center 0.25s ease-out;
 }
+
+* {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
