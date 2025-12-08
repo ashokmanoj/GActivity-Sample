@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useToast } from "../hooks/useToast";
 
 export default function Login({ onLogin }) {
   const [user, setUser] = useState("");
@@ -10,12 +11,13 @@ export default function Login({ onLogin }) {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!user.trim() || !password.trim()) {
-      setError("Please enter username and password.");
+      toast.error("Please enter username and password.", "error");
       return;
     }
 
@@ -23,7 +25,7 @@ export default function Login({ onLogin }) {
 
     try {
       const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email: user,      // backend expects email
+        email: user, // backend expects email
         password: password,
       });
 
@@ -34,15 +36,16 @@ export default function Login({ onLogin }) {
       // update login state in App.jsx
       if (onLogin) onLogin();
 
+      toast.success("Login successful", "success");
+
       // redirect to dashboard
       navigate("/dashboard");
-
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.message || "Login failed");
+        toast.error(err.response.data.message || "Login failed", "error");
         navigate("/");
       } else {
-        setError("Server not reachable");
+        toast.error("Server not reachable", "error");
       }
     }
   };
