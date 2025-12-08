@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useToast } from "../hooks/useToast";
+import { toast } from "react-toastify";
 
 export default function Login({ onLogin }) {
   const [user, setUser] = useState("");
@@ -11,7 +11,7 @@ export default function Login({ onLogin }) {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  const toast = useToast();
+  // const toast = toast;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
