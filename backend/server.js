@@ -10,11 +10,24 @@ import "./src/config/db.js";
 import appRoutes from "./src/app.js";
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://192.168.1.10:5173",
+  "https://2jm4vvvb-5173.inc1.devtunnels.ms/",
+  "https://2jm4vvvb-5000.inc1.devtunnels.ms/"
+];
 
 // ⭐ CORS FIX (works in Express v5)
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
