@@ -16,10 +16,10 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="space-y-6 text-gray-900 px-3 sm:px-4 md:px-6 lg:px-0">
+    <div className="space-y-6 text-gray-900 px-6 sm:px-4 md:px-6 lg:px-0">
 
       {/* ---------- TOP CARDS ---------- */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pr-6 sm:pr-0">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 sm:pr-0">
         <DashboardCard icon={<FiList size={22} />} title="Total Tasks" value="1,248" trend="+12%" color="blue" />
         <DashboardCard icon={<FiUsers size={22} />} title="Active Executives" value="562" trend="+8%" color="green" />
         <DashboardCard icon={<FiMapPin size={22} />} title="Visited Locations" value="8,431" trend="+15%" color="purple" />
