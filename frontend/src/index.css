@@ -10,13 +10,13 @@
 @tailwind utilities;
 
 /* Hide scrollbar for sidebar */
-.sidebar-scroll::-webkit-scrollbar {
+/* .sidebar-scroll::-webkit-scrollbar {
   width: 0px;
 }
 .sidebar-scroll {
   scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE */
-}
+  /* -ms-overflow-style: none; /* IE */
+/* }
 
 @keyframes toast-enter {
   from {
@@ -27,7 +27,7 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
+} */ */ */
 
 .animate-toast-enter {
   animation: toast-enter 0.25s ease-out;
@@ -50,4 +50,18 @@
 
 * {
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+Smooth thin scrollbar
+::-webkit-scrollbar {
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
 }
