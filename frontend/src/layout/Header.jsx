@@ -120,7 +120,7 @@ export default function Header({ setMobileOpen }) {
           {openUserMenu && (
             <div
               className="
-              absolute right-0 mt-2 w-44 bg-white dark:bg-gray-800 
+               right-0 mt-2 w-44 bg-white dark:bg-gray-800 
               rounded-xl border dark:border-gray-700 shadow-lg overflow-hidden
             "
             >
