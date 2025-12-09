@@ -1,73 +1,49 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 
 export default function Login({ onLogin }) {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  // const toast = toast;
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!user.trim() || !password.trim()) {
-      toast.error("Please enter username and password.", "error");
+      toast.error("Please enter username and password.");
       return;
     }
 
-    setError("");
+    // Fake login success — no backend
+    toast.success("Login successful");
 
-    try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
-        email: user, // backend expects email
-        password: password,
-      });
+    // Update login state in App.jsx if needed
+    if (onLogin) onLogin();
 
-      // Save token & user in localStorage
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      // update login state in App.jsx
-      if (onLogin) onLogin();
-
-      toast.success("Login successful", "success");
-
-      // redirect to dashboard
-      navigate("/dashboard");
-    } catch (err) {
-      if (err.response) {
-        toast.error(err.response.data.message || "Login failed", "error");
-        navigate("/");
-      } else {
-        toast.error("Server not reachable", "error");
-      }
-    }
+    // Navigate to dashboard
+    navigate("/dashboard");
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-md rounded-2xl shadow-xl p-8">
+
         {/* LOGO */}
         <div className="text-center mb-6">
           <div className="mx-auto w-16 h-16 rounded-full bg-blue-600 text-white flex items-center justify-center text-3xl font-bold shadow">
             G
           </div>
-          <h1 className="mt-4 text-2xl font-bold text-gray-800">
-            GActivity Login
-          </h1>
-          <p className="text-gray-500 text-sm mt-1">
-            Welcome back! Please sign in.
-          </p>
+          <h1 className="mt-4 text-2xl font-bold text-gray-800">GActivity Login</h1>
+          <p className="text-gray-500 text-sm mt-1">Welcome back! Please sign in.</p>
         </div>
 
         {/* FORM */}
         <form onSubmit={handleSubmit} className="space-y-5">
+
           {/* Username */}
           <div>
             <label className="block text-gray-700 text-sm mb-1">Username</label>
@@ -94,6 +70,7 @@ export default function Login({ onLogin }) {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-transparent outline-none text-sm"
               />
+
               <button
                 type="button"
                 onClick={() => setShowPass(!showPass)}
@@ -103,9 +80,6 @@ export default function Login({ onLogin }) {
               </button>
             </div>
           </div>
-
-          {/* Error message */}
-          {error && <p className="text-red-600 text-sm text-center">{error}</p>}
 
           {/* Login Button */}
           <button
@@ -121,6 +95,7 @@ export default function Login({ onLogin }) {
               Forgot Password?
             </span>
           </p>
+
         </form>
 
         {/* FOOTER */}
