@@ -1,5 +1,7 @@
 import FilterBar from "../components/common/FilterBar";
 import DistanceFilter from "../components/filters/DistanceFilter";
+import Map from "../components/map/Map";
+import RouteMap from "../components/map/RouteMap";
 
 const fields = [];
 
@@ -66,6 +68,8 @@ export default function Distance() {
         <h2 className="text-xl font-semibold">Distance Summary</h2>
         <span>Distance Summary data show here..........</span>
       </div>
+      {/* <Map /> */}
+      {/* <RouteMap /> */}
     </div>
   );
 }

@@ -40,11 +40,11 @@ const modules = [
     path: "/class-status",
     icon: <FiHelpCircle size={20} />,
   },
-  {
-    name: "User Route Map",
-    path: "/user-route-map",
-    icon: <FiMap size={20} />,
-  },
+  // {
+  //   name: "User Route Map",
+  //   path: "/UserRouteMapPage",
+  //   icon: <FiMap size={20} />,
+  // },
 ];
 
 export default function Sidebar({
