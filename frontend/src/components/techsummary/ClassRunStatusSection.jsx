@@ -2,10 +2,10 @@ import React from "react";
 // import usePagination from "../../utils/usePagination";
 
 export default function ClassRunStatusSection({ summary }) {
-  const { page, totalPages, currentData, goNext, goPrev } = usePagination(
-    summary.classRunStatus,
-    10
-  );
+  // const { page, totalPages, currentData, goNext, goPrev } = usePagination(
+  //   summary.classRunStatus,
+  //   10
+  // );
 
   return (
     <div className="bg-white shadow rounded-xl border mt-4">
@@ -35,20 +35,20 @@ export default function ClassRunStatusSection({ summary }) {
               </thead>
 
               <tbody>
-                {currentData.map((row) => (
-                  <tr key={row.sl} className="even:bg-gray-50">
-                    <td className="border p-2">{row.sl}</td>
-                    <td className="border p-2">{row.institution}</td>
-                    <td className="border p-2">{row.lastVisit}</td>
-                    <td className="border p-2">{row.sessionRun}</td>
-                    <td className="border p-2">{row.volunteerPresence}</td>
-                    <td className="border p-2">{row.tickets}</td>
+                
+                  <tr  className="even:bg-gray-50">
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
+                    <td className="border p-2"></td>
                     <td className="border p-2">
-                      {row.slcStatusDays.join(" ")}
+                      
                     </td>
-                    <td className="border p-2">{row.lastRACRun}</td>
+                    <td className="border p-2"></td>
                   </tr>
-                ))}
+               
               </tbody>
             </table>
           </div>
@@ -56,20 +56,18 @@ export default function ClassRunStatusSection({ summary }) {
           {/* Pagination */}
           <div className="flex justify-between items-center p-3">
             <button
-              onClick={goPrev}
-              disabled={page === 1}
+              
               className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
             >
               Previous
             </button>
 
             <span className="text-sm text-gray-600">
-              Page {page} of {totalPages}
+              Page 
             </span>
 
             <button
-              onClick={goNext}
-              disabled={page === totalPages}
+             
               className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
             >
               Next

@@ -2,10 +2,10 @@ import React from "react";
 // import usePagination from "../../utils/usePagination";
 
 export default function AttendanceDetail({ summary, exec, onClose }) {
-  const { page, totalPages, currentData, goNext, goPrev } = usePagination(
-    summary.attendanceRows,
-    10
-  );
+  // const { page, totalPages, currentData, goNext, goPrev } = usePagination(
+  //   summary.attendanceRows,
+  //   10
+  // );
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
